@@ -1,5 +1,6 @@
 package com.example.employee_management_system.util;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -14,8 +15,8 @@ public class NumberFormatter {
         DECIMAL_FORMAT.setGroupingUsed(true);
     }
 
-    public static String format(Double value) {
-        if (value == null) {
+    public static String format(BigDecimal value) {
+            if (value == null) {
             return "0,00";
         }
         return DECIMAL_FORMAT.format(value);

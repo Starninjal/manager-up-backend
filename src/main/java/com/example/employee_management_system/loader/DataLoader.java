@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -67,8 +68,6 @@ public class DataLoader {
 
     private void loadEmployees(EmployeeRepository employeeRepository, EmployeeFunctionRepository employeeFunctionRepository) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        // Buscar as funções necessárias
         Optional<EmployeeFunction> operatorOpt = employeeFunctionRepository.findByName("Operador");
         Optional<EmployeeFunction> coordenadorOpt = employeeFunctionRepository.findByName("Coordenador");
         Optional<EmployeeFunction> diretorOpt = employeeFunctionRepository.findByName("Diretor");
@@ -85,70 +84,70 @@ public class DataLoader {
                     Employee.builder()
                             .name("Maria")
                             .birthDate(LocalDate.parse("18/10/2000", formatter))
-                            .salary(2008.44)
-                            .employeeFunction(operatorOpt.get()) // Atribuindo função padrão
+                            .salary(BigDecimal.valueOf(2008.44))
+                            .employeeFunction(operatorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("João")
                             .birthDate(LocalDate.parse("12/05/1990", formatter))
-                            .salary(2284.38)
+                            .salary(BigDecimal.valueOf(2284.38))
                             .employeeFunction(operatorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Caio")
                             .birthDate(LocalDate.parse("02/05/1961", formatter))
-                            .salary(9885.14)
+                            .salary(BigDecimal.valueOf(9885.14))
                             .employeeFunction(coordenadorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Miguel")
                             .birthDate(LocalDate.parse("14/10/1988", formatter))
-                            .salary(19119.88)
+                            .salary(BigDecimal.valueOf(19119.88))
                             .employeeFunction(diretorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Alice")
                             .birthDate(LocalDate.parse("05/01/1995", formatter))
-                            .salary(2234.68)
+                            .salary(BigDecimal.valueOf(2234.68))
                             .employeeFunction(recepcionistaOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Heltor")
                             .birthDate(LocalDate.parse("19/11/1999", formatter))
-                            .salary(1582.72)
+                            .salary(BigDecimal.valueOf(1582.72))
                             .employeeFunction(operatorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Arthur")
                             .birthDate(LocalDate.parse("31/03/1993", formatter))
-                            .salary(4071.84)
+                            .salary(BigDecimal.valueOf(4071.84))
                             .employeeFunction(contadorOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Laura")
                             .birthDate(LocalDate.parse("08/03/1994", formatter))
-                            .salary(3017.45)
+                            .salary(BigDecimal.valueOf(3017.45))
                             .employeeFunction(gerenteOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Heloisa")
                             .birthDate(LocalDate.parse("24/05/2003", formatter))
-                            .salary(1806.85)
+                            .salary(BigDecimal.valueOf(1806.85))
                             .employeeFunction(eletricistaOpt.get())
                             .build(),
 
                     Employee.builder()
                             .name("Helena")
                             .birthDate(LocalDate.parse("02/09/1996", formatter))
-                            .salary(2799.89)
+                            .salary(BigDecimal.valueOf(2799.89))
                             .employeeFunction(gerenteOpt.get())
                             .build()
             );

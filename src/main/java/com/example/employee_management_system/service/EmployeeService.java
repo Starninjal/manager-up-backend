@@ -12,6 +12,8 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -86,7 +88,7 @@ public class EmployeeService implements IService<Employee, EmployeeDto> {
 
     public List<Employee> findAllEmployeesWhenBirthDateBetween(Integer startMonthValue, Integer endMonthValue) {
         return findAll().stream()
-                .filter(employee -> employee.getBirthDate().getMonthValue() >= startMonthValue && employee.getBirthDate().getMonthValue() <= endMonthValue)
+                .filter(employee -> employee.getBirthDate().getMonthValue() == startMonthValue || employee.getBirthDate().getMonthValue() <= endMonthValue)
                 .toList();
     }
 
@@ -101,10 +103,10 @@ public class EmployeeService implements IService<Employee, EmployeeDto> {
     }
 
     public String sumAllEmployeesSalary() {
-        return NumberFormatter.format(findAll().stream().mapToDouble(Employee::getSalary).sum());
+        return NumberFormatter.format(findAll().stream().map(Employee::getSalary).reduce(BigDecimal.ZERO, BigDecimal::add));
     }
 
-    public Integer employeeMinimumWageCountBy(Double salary) {
-        return (int) (salary / EmployeeUtil.EMPLOYEE_MINIMUM_WAGE);
+    public Integer employeeMinimumWageCountBy(BigDecimal salary) {
+        return salary.divide(BigDecimal.valueOf(EmployeeUtil.EMPLOYEE_MINIMUM_WAGE), 2, RoundingMode.HALF_UP).intValue();
     }
 }

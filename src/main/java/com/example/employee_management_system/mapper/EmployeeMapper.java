@@ -33,6 +33,6 @@ public class EmployeeMapper {
     }
 
     public List<EmployeeDto> toListDto(List<Employee> employeeList) {
-        return employeeList.stream().map(e -> toDto(e, false)).toList();
+        return employeeList.stream().map(e -> toDto(e, true)).toList();
     }
 }

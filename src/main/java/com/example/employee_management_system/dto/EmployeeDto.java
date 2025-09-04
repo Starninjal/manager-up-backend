@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -17,7 +18,7 @@ import java.time.Period;
 @SuperBuilder
 public class EmployeeDto extends PersonData {
     private Long employeeId;
-    private Double salary;
+    private BigDecimal salary;
     private EmployeeFunctionDto employeeFunctionDto;
 
     @JsonProperty("salary")
